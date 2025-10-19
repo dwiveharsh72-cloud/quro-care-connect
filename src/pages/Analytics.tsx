@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { StatCard } from "@/components/StatCard";
 import { TrendingUp, Users, IndianRupee, Activity } from "lucide-react";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { RevenueLeakChart } from "@/components/RevenueLeakChart";
 
 const weeklyData = [
   { day: "Mon", patients: 45, revenue: 32000 },
@@ -112,6 +113,47 @@ const Analytics = () => {
               />
             </LineChart>
           </ResponsiveContainer>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <RevenueLeakChart />
+
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">AI Performance Metrics</h3>
+          <div className="space-y-4">
+            <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium">Prescriptions Optimized</span>
+                <span className="text-2xl font-bold text-primary">847</span>
+              </div>
+              <p className="text-xs text-muted-foreground">This month • +32% from last month</p>
+            </div>
+
+            <div className="p-4 bg-success/5 rounded-lg border border-success/20">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium">Drug Interactions Caught</span>
+                <span className="text-2xl font-bold text-success">127</span>
+              </div>
+              <p className="text-xs text-muted-foreground">Prevented potential adverse events</p>
+            </div>
+
+            <div className="p-4 bg-accent/5 rounded-lg border border-accent/20">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium">Avg Claim Success Rate</span>
+                <span className="text-2xl font-bold text-accent">89%</span>
+              </div>
+              <p className="text-xs text-muted-foreground">+18% improvement with AI</p>
+            </div>
+
+            <div className="p-4 bg-warning/5 rounded-lg border border-warning/20">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium">Revenue per Prescription</span>
+                <span className="text-2xl font-bold text-warning">₹1,840</span>
+              </div>
+              <p className="text-xs text-muted-foreground">+₹320 with smart upselling</p>
+            </div>
+          </div>
         </Card>
       </div>
 

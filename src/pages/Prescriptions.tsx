@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Mic, FileText, Plus, Printer, Send, Sparkles, Activity, Pill, CheckCircle2, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
+import { AIRevenueOptimizer } from "@/components/AIRevenueOptimizer";
+import { DrugInteractionChecker } from "@/components/DrugInteractionChecker";
 
 const Prescriptions = () => {
   const [prescription, setPrescription] = useState("");
@@ -30,9 +32,9 @@ const Prescriptions = () => {
             possibleDiagnosis: ["Upper Respiratory Tract Infection", "Viral Pharyngitis"],
             confidence: 87,
             suggestedMedications: [
-              { name: "Tab Azithromycin 500mg", dosage: "OD for 3 days", reason: "Bacterial coverage" },
-              { name: "Syp Cough suppressant", dosage: "10ml TDS", reason: "Symptom relief" },
-              { name: "Tab Paracetamol 650mg", dosage: "SOS for fever", reason: "Fever management" }
+              { name: "Tab Azithromycin 500mg", dosage: "OD for 3 days", reason: "Bacterial coverage", cost: 120, insurerCode: "AZI-500" },
+              { name: "Syp Cough suppressant", dosage: "10ml TDS", reason: "Symptom relief", cost: 85, insurerCode: "COUGH-01" },
+              { name: "Tab Paracetamol 650mg", dosage: "SOS for fever", reason: "Fever management", cost: 45, insurerCode: "PCM-650" }
             ],
             recommendedTests: ["Throat swab", "CBC (if fever persists)"],
             redFlags: [],
@@ -68,6 +70,19 @@ const Prescriptions = () => {
           </div>
         </div>
       </div>
+
+      {aiAnalysis && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <AIRevenueOptimizer
+            medications={aiAnalysis.suggestedMedications || []}
+            symptoms={aiAnalysis.symptoms || []}
+            diagnosis={aiAnalysis.possibleDiagnosis?.[0] || ""}
+          />
+          <DrugInteractionChecker
+            medications={aiAnalysis.suggestedMedications || []}
+          />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left: Voice Input */}
